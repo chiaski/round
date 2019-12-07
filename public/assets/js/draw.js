@@ -10,8 +10,6 @@ function setup() {
 	// Creating canvas
 	const cv = createCanvas(windowWidth, windowHeight)
 	cv.background(0)
-    
-    colorMode(HSL);
 
 	// Start the socket connection
 	socket = io.connect(); 
@@ -45,15 +43,10 @@ function setup() {
     
 	// Adding a mousePressed listener to the button
 	stroke_btn.mousePressed(() => {
-        
-          if (hue > 360) {
-            hue = 0;
-          } else {
-            hue += 10;
-          }
-          colorMode(HSL, 360);
-          noStroke();
-          fill(hue, 200, 200);
+        hue > 360 ? hue = 0 : hue += 3;
+        colorMode(HSL, 360);
+        noStroke();
+        fill(hue, 200, 200);
         
 	})
     
@@ -62,16 +55,11 @@ function setup() {
 
 function mouseDragged() {
     
-          if (hue > 360) {
-            hue = 0;
-          } else {
-            hue += 10;
-          }
-          colorMode(HSL, 360);
-          noStroke();
-          fill(hue, 200, 200);
+    hue > 360 ? hue = 0 : hue += 3;
+    colorMode(HSL, 360);
+    noStroke();
+    fill(hue, 200, 200);
         
-    
 	// Draw
 	stroke(hue)
 	strokeWeight(strokeWidth)
