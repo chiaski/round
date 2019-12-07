@@ -1,0 +1,27 @@
+{
+  "name": "letter",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chiaski/Room.git"
+  },
+  "author": "Chia <chiamisola@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev:assets": "webpack --watch",
+    "dev:start": "live-server --open=./public/ --host=localhost --watch=./public/ ",
+    "dev": "npm-run-all -p dev:*",
+    "build": "cross-env NODE_ENV=production webpack"
+  },
+  "bugs": {
+    "url": "https://github.com/chiaski/Room/issues"
+  },
+  "homepage": "https://github.com/chiaski/Room#readme",
+  "dependencies": {
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10"
+  },
+  "devDependencies": {},
+  "description": ""
+}
