@@ -3,20 +3,60 @@
   <head>
     <meta charset="UTF-8">
     <title>title</title>
+    <link rel="stylesheet" href="assets/styling/main.css">
+      
+      <script src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js'></script>
+      
+      <script src="./assets/js/p5.min.js"></script>  
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/addons/p5.dom.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/addons/p5.sound.min.js">
+  </script>
+      
   </head>
   <body>
+      
+      <div id="container" class="container">
+      
+      
+      <h1>you are all the people behind you</h1>
+      
+          <div id="box">
+          
+          <h2>hello</h2>
+          <p>hi</p>
+              
+  <input type="text" name="custom_color" placeholder="#FFFFFF" id="pickcolor" class="call-picker" />
+  <div id="color-holder" class="color-holder call-picker"></div>
+  <button id="color-btn">Change color</button>
+  <br />
+  <p>Stroke</p>
+  <input type="text" name="stroke_width" placeholder="4" id="stroke-width-picker" class="stroke_width_picker" />
+  <button id="stroke-btn">Change stroke width</button>
+              
+          </div>
+          
+          
+      </div>
   
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
   <script src="https://threejs.org/build/three.js"></script>
+  
+      
+  <script src="./assets/js/draw.js"></script>
+      
+ <!-- <script src="assets/js/test.js"></script>-->
       
   <script type="text/javascript">
    function autorun()
    {
-    
+        
+     
    }
    if (window.addEventListener) window.addEventListener("load", autorun, false);
    else if (window.attachEvent) window.attachEvent("onload", autorun);
    else window.onload = autorun;
   </script>
+      
+     
   </body>
 </html>
