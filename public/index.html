@@ -12,9 +12,16 @@
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/addons/p5.sound.min.js">
   </script>
       
+    
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
       
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=process.env.API_GMAPS&callback=initMap"
-  type="text/javascript"></script>
+      
+  <script src="https://threejs.org/build/three.js"></script>
+  
+      
+  <script src="./assets/js/main.js"></script>
+  <script src="./assets/js/draw.js"></script>
+      
       
   </head>
   <body>
@@ -25,7 +32,7 @@
       <h1>you are all the people behind you</h1>
           
           <div class="box">
-              <div id="map">
+              <div id="map" style="width:100%; height:600px;background:red;">
               
               </div>
           </div>
@@ -45,35 +52,45 @@
           
       </div>
   
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
-  <script src="https://threejs.org/build/three.js"></script>
-  
       
-  <script src="./assets/js/main.js"></script>
-  <script src="./assets/js/draw.js"></script>
+    <!-- SCRIPTS -->
       
  <!-- <script src="assets/js/test.js"></script>-->
       
-  <script type="text/javascript">
-   function autorun()
-   {
-            function initialize() {
-      var fenway = {lat: 42.345573, lng: -71.098326};
+    <script>
+function initialize() {
+      var fenway = {lat: 41.309327, lng: -72.929250};
       var map = new google.maps.Map(document.getElementById('map'), {
         center: fenway,
         zoom: 14
       });
+    
       var panorama = new google.maps.StreetViewPanorama(
-          document.getElementById('pano'), {
+          document.getElementById('map'), {
             position: fenway,
             pov: {
               heading: 34,
-              pitch: 10
-            }
+              pitch: 10,
+                
+            },
+              linksControl: false,
+                panControl: false
           });
       map.setStreetView(panorama);
     }
-     
+      
+      </script>
+      
+      
+ <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAq7DNXbXovJQsc6InqHtJelNBuG7IekWo&callback=initialize"
+  type="text/javascript"></script>
+      
+  <script type="text/javascript">
+      
+   function autorun()
+   {
+    
+       
    }
    if (window.addEventListener) window.addEventListener("load", autorun, false);
    else if (window.attachEvent) window.attachEvent("onload", autorun);
