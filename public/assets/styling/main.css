@@ -1,2 +1,2 @@
-#container{position:absolute;background:#000;top:0;left:0;width:100%;color:#fff}#box{z-index:9999}
+#container{position:absolute;background:#000;top:0;left:0;width:100%;color:#fff;display:flex;flex-wrap:wrap}.box{width:100%}#box{z-index:9999}
 

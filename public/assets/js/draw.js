@@ -10,6 +10,9 @@ function setup() {
 	// Creating canvas
 	const cv = createCanvas(windowWidth, windowHeight)
 	cv.background(0)
+    
+    capture = createCapture(VIDEO);
+    capture.size(320, 240);
 
 	// Start the socket connection
 	socket = io.connect(); 
@@ -51,6 +54,11 @@ function setup() {
 	})
     
     
+}
+
+function draw(){
+    
+  image(capture, 0, 0, 320, 240);
 }
 
 function mouseDragged() {

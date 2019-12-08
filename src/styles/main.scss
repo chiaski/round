@@ -6,6 +6,12 @@
     left:0;
     width:100%;
     color:#fff;
+    display:flex;
+    flex-wrap: wrap;
+}
+
+.box{
+    width:100%;
 }
 
 #box{
