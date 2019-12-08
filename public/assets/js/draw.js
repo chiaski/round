@@ -12,9 +12,11 @@ function setup() {
 	// Creating canvas
 	const cv = createCanvas(windowWidth, windowHeight)
 	cv.background(0)
+    cv.parent("paint")
     
     capture = createCapture(VIDEO);
-    capture.size(320, 240);
+    capture.size(500, 240);
+    capture.parent("camera");
 
 	// Start the socket connection
 	socket = io.connect(); 
