@@ -13,7 +13,7 @@
   </script>
       
       
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAq7DNXbXovJQsc6InqHtJelNBuG7IekWo&callback=initMap"
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=process.env.API_GMAPS&callback=initMap"
   type="text/javascript"></script>
       
   </head>
@@ -25,7 +25,9 @@
       <h1>you are all the people behind you</h1>
           
           <div class="box">
+              <div id="map">
               
+              </div>
           </div>
       
           
@@ -47,6 +49,7 @@
   <script src="https://threejs.org/build/three.js"></script>
   
       
+  <script src="./assets/js/main.js"></script>
   <script src="./assets/js/draw.js"></script>
       
  <!-- <script src="assets/js/test.js"></script>-->
@@ -54,7 +57,22 @@
   <script type="text/javascript">
    function autorun()
    {
-        
+            function initialize() {
+      var fenway = {lat: 42.345573, lng: -71.098326};
+      var map = new google.maps.Map(document.getElementById('map'), {
+        center: fenway,
+        zoom: 14
+      });
+      var panorama = new google.maps.StreetViewPanorama(
+          document.getElementById('pano'), {
+            position: fenway,
+            pov: {
+              heading: 34,
+              pitch: 10
+            }
+          });
+      map.setStreetView(panorama);
+    }
      
    }
    if (window.addEventListener) window.addEventListener("load", autorun, false);

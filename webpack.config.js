@@ -1,6 +1,7 @@
 const path = require('path');
 var webpack = require('webpack');
 var ImageminPlugin = require('imagemin-webpack-plugin').default
+require('dotenv').config() 
 
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
@@ -116,11 +117,12 @@ module.exports = {
     ]
   },
   plugins: [
-      
-        new webpack.ProvidePlugin({$: 'jquery', jQuery: 'jquery' }),
+    
+    new webpack.ProvidePlugin({$: 'jquery', jQuery: 'jquery' }),
     new MiniCssExtractPlugin({
       filename: './assets/styling/[name].css',
       chunkFilename: "[name].css"
-    })
+    }),
+    new Dotenv()
   ]
 };
