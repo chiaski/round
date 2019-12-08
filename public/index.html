@@ -29,14 +29,27 @@
       <div id="container" class="container">
       
       
-      <h1>you are all the people behind you</h1>
+      <h3>you are all the people behind you</h3>
           
           <div class="box">
+              
+              <div class="travel-place">
+               <center> <h3>Close your eyes and hope to be brought somewhere</h3>
+                
+                <input type="text" name="location" placeholder="New Haven">
+                  
+                   <button type="button" onclick="_saveImage()">save</button>
+                  
+                  </center>
+              </div>
+              
+              
+              
               <div class="camera-overlay"></div>
               <div id="camera" class="camera"></div>
               
-              <div class="map-overlay" style="top:1000px"></div>
-              <div id="map" style="top:1000px;">
+              <div class="map-overlay" style=""></div>
+              <div id="map" style="">
               
               </div>
           </div>
@@ -53,6 +66,8 @@
               
           </div>
           
+          <div class="box" id="photo" style="min-height:500px;"></div>
+          
           
       </div>
   
@@ -61,8 +76,8 @@
       
  <!-- <script src="assets/js/test.js"></script>-->
      
-       <!--
-    <script>
+      
+    <!--<script>
 function initialize() {
       var fenway = {lat: 41.309327, lng: -72.929250};
       var map = new google.maps.Map(document.getElementById('map'), {
@@ -79,28 +94,48 @@ function initialize() {
                 
             },
               linksControl: false,
-                panControl: false
+                panControl: true
           });
       map.setStreetView(panorama);
     }
       
-      </script>
+      </script>-->
       
       
  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAq7DNXbXovJQsc6InqHtJelNBuG7IekWo&callback=initialize"
   type="text/javascript"></script>
+    <script type="text/javascript" src="assets/js/html2canvas.min.js"></script>
       
   <script type="text/javascript">
       
+    function _saveImage() {
+       
+
+        /* Append image to a div */
+        domtoimage.toPng(document.getElementById('container')).then(function (dataUrl) {
+            var img = new Image();
+            img.src = dataUrl;
+            $("#photo").append(img);
+        }).catch(function (error) {
+            console.error('oops, something went wrong!', error);
+        });
+
+    }
+    
+      
    function autorun()
    {
-    
+        html2canvas(document.body).then(function(canvas) {
+        document.body.appendChild(canvas);
+    });
        
    }
    if (window.addEventListener) window.addEventListener("load", autorun, false);
    else if (window.attachEvent) window.attachEvent("onload", autorun);
    else window.onload = autorun;
   </script>
+      
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script>
       
      
   </body>

@@ -19,7 +19,9 @@
   },
   "homepage": "https://github.com/chiaski/Room#readme",
   "dependencies": {
+    "dom-to-image": "^2.6.0",
     "express": "^4.17.1",
+    "html2canvas": "^1.0.0-rc.5",
     "imagemin-webpack-plugin": "^2.4.2",
     "socket.io": "^2.3.0",
     "sockets": "^0.4.2",

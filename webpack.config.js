@@ -6,6 +6,9 @@ require('dotenv').config()
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 
+
+var domtoimage = require('dom-to-image');
+
 const devMode = process.env.NODE_ENV !== 'production';
 module.exports = {
   // Tells Webpack which built-in optimizations to use
@@ -122,7 +125,6 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: './assets/styling/[name].css',
       chunkFilename: "[name].css"
-    }),
-    new Dotenv()
+    })
   ]
 };

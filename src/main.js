@@ -1,6 +1,8 @@
 import dotenv from 'dotenv';
 dotenv.config()
 
+var domtoimage = require('dom-to-image');
+
 console.log(require('dotenv').config())
 
 
@@ -22,3 +24,19 @@ function initialize() {
       map.setStreetView(panorama);
     }
     */
+
+
+    function _saveImage() {
+       
+
+        /* Append image to a div */
+        domtoimage.toPng(document.getElementById('container')).then(function (dataUrl) {
+            var img = new Image();
+            img.src = dataUrl;
+            $("#photo").append(img);
+        }).catch(function (error) {
+            console.error('oops, something went wrong!', error);
+        });
+
+    }
+    
