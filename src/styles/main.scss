@@ -46,7 +46,7 @@
     z-index:10;
    mix-blend-mode: screen;
     pointer-events: none;
-    
+    border:10px solid yellow;
 }
 
 .camera{
@@ -75,6 +75,26 @@
     background-image:url("../images/overlay-cam.png");
     z-index:11.5;
     pointer-events: none;
+}
+
+.words{
+    position: absolute;
+    top:200px;
+    left:200px;
+    font-size:18px;
+    z-index:9999;
+   
+}
+
+.words textarea{
+    z-index:99 !important;
+    width:500px;
+    border:0;
+    pointer-events: all;
+    height:500px;
+    background:none;
+    font-size:32px;
+    color: #fff;
 }
 
 button{background:#fff;color:#000;}

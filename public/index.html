@@ -31,6 +31,8 @@
               
               <div class="travel-place">
                <center> <h3>Close your eyes and hope to be brought somewhere like  <span id="loc_name">...</span></h3>
+                   
+                   
                 
                 <input type="text" id="field_loc" name="location" placeholder="New Haven">
                   
@@ -38,6 +40,14 @@
                    
                    <button type="button" onclick="_saveImage()">save</button>
                   <br><br>
+                   
+  <input type="text" name="custom_color" placeholder="#ff0000" id="pickcolor" class="call-picker" />
+              
+  <div id="color-holder" class="color-holder call-picker"></div>
+  <button id="color-btn">Change color</button> 
+  <input type="text" name="stroke_width" placeholder="4" id="stroke-width-picker" class="stroke_width_picker" />
+  <button id="stroke-btn">Change stroke width</button>
+                   
                   </center>
               </div>
               
@@ -54,15 +64,16 @@
       
           
           <div class="box" id="paint" style="min-height:900px;">
+              
+              <div class="words">
+              
+              <textarea id="my_words" placeholder="where are the peopel you know">do you remember me?
+                  </textarea></div>
+              
               <div class="camera-overlay"></div>
               <div id="camera" class="camera"></div>
               
-  <input type="text" name="custom_color" placeholder="#ff0000" id="pickcolor" class="call-picker" />
               
-  <div id="color-holder" class="color-holder call-picker"></div>
-  <button id="color-btn">Change color</button> 
-  <input type="text" name="stroke_width" placeholder="4" id="stroke-width-picker" class="stroke_width_picker" />
-  <button id="stroke-btn">Change stroke width</button>
               
           </div>
           
@@ -85,6 +96,19 @@
     <script src="assets/js/game.js"></script>
       
   <script type="text/javascript">
+      var standard_message = $('#my_words').val();
+$('#my_words').focus(
+    function() {
+        if ($(this).val() == standard_message)
+            $(this).val("");
+    }
+);
+$('#my_words').blur(
+    function() {
+        if ($(this).val() == "")
+            $(this).val(standard_message);
+    }
+);
       
       
    function autorun()
