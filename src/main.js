@@ -26,6 +26,23 @@ function initialize() {
     */
 
 
+function _findPlace(){
+    var geocoder = new google.maps.Geocoder();
+var address = document.getElementById("address").value;
+geocoder.geocode( { 'address': address}, function(results, status) {
+  if (status == google.maps.GeocoderStatus.OK)
+  {
+      
+    console.log(results[0].geometry.location.latitude + "," + results[0].geometry.location.longitude);
+      // do something with the geocoded result
+      //
+      // results[0].geometry.location.latitude
+      // results[0].geometry.location.longitude
+  }
+});
+}
+
+
     function _saveImage() {
        
 
