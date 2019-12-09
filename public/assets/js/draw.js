@@ -1,5 +1,4 @@
 
-
 let socket
 let color = '#ff0000'
 let strokeWidth = 4
