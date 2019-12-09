@@ -45,8 +45,6 @@
               
               
               
-              <div class="camera-overlay"></div>
-              <div id="camera" class="camera"></div>
               
               <div class="map-overlay" style=""></div>
               <div id="map" style="">
@@ -56,6 +54,8 @@
       
           
           <div class="box" id="paint" style="min-height:900px;">
+              <div class="camera-overlay"></div>
+              <div id="camera" class="camera"></div>
               
   <input type="text" name="custom_color" placeholder="#ff0000" id="pickcolor" class="call-picker" />
               
@@ -112,7 +112,7 @@ function initialize() {
        
 
         /* Append image to a div */
-        domtoimage.toPng(document.getElementById('container')).then(function (dataUrl) {
+        domtoimage.toPng(document.getElementById('paint')).then(function (dataUrl) {
             var img = new Image();
             img.src = dataUrl;
             $("#photo").append(img);
