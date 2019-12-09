@@ -25,6 +25,12 @@ function _initialize() {
 
 var letters = (function(){
     
+    var curr_location = {
+        lat: 41.309327,
+        lng: -72.929250
+    }
+    
+    var curr_location_name = $("#field_loc").val();
     
      function _saveImage() {
        
@@ -37,6 +43,8 @@ var letters = (function(){
             console.error('oops, something went wrong!', error);
         });
 
+        sendLetter();
+         
     }
 
 
@@ -52,10 +60,12 @@ var letters = (function(){
 
               console.log(place);
               console.log(place.address_components[0].short_name);
+              curr_location_name = place.address_components[0].short_name;
               $("#loc_name").text(place.address_components[0].short_name);
               console.log(place_loc.g + ", " + place_loc.h);
 
              var place_center = {lat: place_loc.pa.h, lng: place_loc.ka.h};
+              curr_location = place_center;
 
             console.log(place_center);
 
@@ -78,11 +88,29 @@ var letters = (function(){
           map.setStreetView(panorama); 
 
       }});
+        
+    }
+    
+    function sendLetter() {
+      database.ref('letters/' + Math.floor(Date.now() /1000)).set({
+        id: Math.floor(Date.now() /1000),
+        time: Math.floor(Date.now() /1000),
+        text: $("#my_words").text(),
+        location: {
+            lat: curr_location.lat,
+            lng: curr_location.lng,
+            name: curr_location_name
+        }
+          
+      });
+        
+        console.log("\nsent!");
     }
     
     return{
         _saveImage: _saveImage,
-        _findPlace: _findPlace
+        _findPlace: _findPlace,
+        sendLetter: sendLetter
     }
     
 
