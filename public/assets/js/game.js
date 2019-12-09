@@ -1,4 +1,28 @@
 
+
+/* LOAD MAP */
+function _initialize() {
+      var fenway = {lat: 41.309327, lng: -72.929250};
+      var map = new google.maps.Map(document.getElementById('map'), {
+        center: fenway,
+        zoom: 14
+      });
+    
+      var panorama = new google.maps.StreetViewPanorama(
+          document.getElementById('map'), {
+            position: fenway,
+            pov: {
+              heading: 34,
+              pitch: 10,
+                
+            },
+              linksControl: false,
+                panControl: true
+          });
+      map.setStreetView(panorama);
+    }
+      
+
     function _saveImage() {
        
 
@@ -22,21 +46,23 @@ geocoder.geocode( { 'address': address}, function(results, status) {
   {
       
       const place = results[0];
-      const place_loc = place.geometry.bounds.ka;
+      const place_loc = place.geometry.bounds;
       
       console.log(place);
       console.log(place.address_components[0].short_name);
       $("#loc_name").text(place.address_components[0].short_name);
       console.log(place_loc.g + ", " + place_loc.h);
       
-     var place_center = {lat: place_loc.g, lng: place_loc.h};
+     var place_center = {lat: place_loc.pa.h, lng: place_loc.ka.h};
       
-      console.log(place_center);
+    console.log(place_center);
       
      var map = new google.maps.Map(document.getElementById('map'), {
         center: place_center,
-        zoom: 14
+        zoom: 19
       });
+      
+      
       
       var panorama = new google.maps.StreetViewPanorama(
           document.getElementById('map'), {
@@ -47,7 +73,7 @@ geocoder.geocode( { 'address': address}, function(results, status) {
             }
           });
       
-      map.setStreetView(panorama);
+      map.setStreetView(panorama); 
       
       
       // do something with the geocoded result

@@ -45,6 +45,8 @@
               
               
               <div class="map-overlay" style=""></div>
+              
+              
               <div id="map" style="">
               
               </div>
@@ -74,30 +76,6 @@
       
  <!-- <script src="assets/js/test.js"></script>-->
      
-      
-    <script>
-function initialize() {
-      var fenway = {lat: 41.309327, lng: -72.929250};
-      var map = new google.maps.Map(document.getElementById('map'), {
-        center: fenway,
-        zoom: 14
-      });
-    
-      var panorama = new google.maps.StreetViewPanorama(
-          document.getElementById('map'), {
-            position: fenway,
-            pov: {
-              heading: 34,
-              pitch: 10,
-                
-            },
-              linksControl: false,
-                panControl: true
-          });
-      map.setStreetView(panorama);
-    }
-      
-      </script>
       
       
  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAq7DNXbXovJQsc6InqHtJelNBuG7IekWo&callback=initialize"
