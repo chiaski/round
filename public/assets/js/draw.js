@@ -1,5 +1,6 @@
 
 let socket
+let capture
 let color = '#ff0000'
 let strokeWidth = 4
 
@@ -59,9 +60,8 @@ function setup() {
     
 }
 
-function draw(){
-    
-  image(capture, 0, 0, 320, 240);
+function draw(){   
+  image(capture, 0, 0, 400, 240);
 }
 
 function mouseDragged() {

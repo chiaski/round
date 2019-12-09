@@ -44,7 +44,7 @@ var letters = (function(){
         });
 
         sendLetter();
-         
+        
     }
 
 
