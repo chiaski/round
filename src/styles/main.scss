@@ -101,7 +101,15 @@
     color: #fff;
 }
 
-button{background:#fff;color:#000;}
+input[type=text]{
+    width:200px;
+    padding:1em;
+}
+
+button{
+    padding:1em;
+    background:#fff;
+    color:#000;}
 
 
 /* TRAVEL */

@@ -23,10 +23,8 @@ function _initialize() {
     }
 
 
-var letters = function() {
+var letters = (function(){
     
-    
-    var geocoder = new google.maps.Geocoder();
     
      function _saveImage() {
        
@@ -43,6 +41,7 @@ var letters = function() {
 
 
     function _findPlace(){
+        var geocoder = new google.maps.Geocoder();
         var address = document.getElementById("field_loc").value;
         geocoder.geocode( { 'address': address}, function(results, status) {
           if (status == google.maps.GeocoderStatus.OK)
@@ -78,12 +77,17 @@ var letters = function() {
 
           map.setStreetView(panorama); 
 
-      }
-    });
+      }});
     }
+    
+    return{
+        _saveImage: _saveImage,
+        _findPlace: _findPlace
+    }
+    
 
     
-}
+})();
       
 
    
