@@ -7,7 +7,7 @@ let strokeWidth = 4
 var hue;
 
 function setup() {
-    hue = 0;
+    hue = 80;
     
 	// Creating canvas
 	const cv = createCanvas(windowWidth, windowHeight)
@@ -16,7 +16,6 @@ function setup() {
     
     capture = createCapture(VIDEO);
     capture.size(500, 240);
-    capture.parent("camera");
 
 	// Start the socket connection
 	socket = io.connect(); 
@@ -38,6 +37,8 @@ function setup() {
 	})
     
     
+    
+    
 	// Adding a mousePressed listener to the button
 	/* color_btn.mousePressed(() => {
 		// Checking if the input is a valid hex color
@@ -49,24 +50,26 @@ function setup() {
 	}) */
     
 	// Adding a mousePressed listener to the button
-	stroke_btn.mousePressed(() => {
+	/*
+    stroke_btn.mousePressed(() => {
         hue > 360 ? hue = 0 : hue += 3;
         colorMode(HSL, 360);
         noStroke();
         fill(hue, 200, 200);
         
 	})
+    */
     
     
 }
 
 function draw(){   
-  image(capture, 0, 0, 400, 240);
+  image(capture, 200, 100, 400, 240);
 }
 
 function mouseDragged() {
     
-    hue > 360 ? hue = 0 : hue += 3;
+    hue > 360 ? hue = 30 : hue += 3;
     colorMode(HSL, 360);
     noStroke();
     fill(hue, 200, 200);
@@ -94,3 +97,10 @@ function sendmouse(x, y, pX, pY) {
 	socket.emit('mouse', data)
 }
 
+
+function canvasToBase64 () {
+    var c = $('#paint').find('canvas'); // using jQuery
+    var imageData = c[0].toDataURL('image/png'); // produces a base64 image string
+    // send imageData to server.....
+    console.log(imageData);
+}
