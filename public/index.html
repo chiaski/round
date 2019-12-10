@@ -24,10 +24,14 @@
       
       <div id="container" class="container">
       
-<!--
-      <h3>you are all the people behind you</h3> -->
-          
           <div class="box">
+              
+              <div class="time">
+              <span class="tell_time" id="loc_lat">14.5995</span> 
+              <span class="tell_time" id="loc_lng"> 120.9842</span> 
+              </div>
+              
+              
               <center>
               <div class="travel-place">
                 <h2>Close your eyes and hope to be brought somewhere like  <span id="loc_name">...</span></h2>
@@ -68,8 +72,8 @@
               <textarea id="my_words" placeholder="where are the peopel you know">do you remember me?
                   </textarea></div>
               
-              <div class="camera-overlay"></div>
-              <div id="camera" class="camera"></div>
+              <div id="camera" class="camera">
+              <div class="camera-overlay"></div></div>
               
               
               
@@ -94,19 +98,20 @@
     <script async defer src="assets/js/game.js"></script>
       
   <script type="text/javascript">
-      var standard_message = $('#my_words').val();
-$('#my_words').focus(
-    function() {
-        if ($(this).val() == standard_message)
-            $(this).val("");
-    }
-);
-$('#my_words').blur(
-    function() {
-        if ($(this).val() == "")
-            $(this).val(standard_message);
-    }
-);
+          var standard_message = $('#my_words').val();
+    $('#my_words').focus(
+        function() {
+            if ($(this).val() == standard_message)
+                $(this).val("");
+        }
+    );
+    $('#my_words').blur(
+        function() {
+            if ($(this).val() == "")
+                $(this).val(standard_message);
+        }
+    );
+      
       
       
    function autorun()
@@ -115,6 +120,8 @@ $('#my_words').blur(
         document.body.appendChild(canvas);
     });
        
+
+
    }
    if (window.addEventListener) window.addEventListener("load", autorun, false);
    else if (window.attachEvent) window.attachEvent("onload", autorun);

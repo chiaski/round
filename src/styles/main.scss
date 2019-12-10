@@ -1,3 +1,4 @@
+@import url("https://use.typekit.net/ncx8xtz.css");
 
 #container{
     position:absolute;
@@ -53,13 +54,14 @@
     background:cyan;
     max-height:300px;
     overflow:hidden;
+    z-index:99;
 }
 
 #paint{
     position: absolute;
     z-index:10;
     
-   mix-blend-mode: screen;
+    mix-blend-mode: screen;
     pointer-events: none;
     border:10px solid yellow;
     height:80vh;
@@ -74,23 +76,21 @@
     width:500px;
     height:240px;
     margin: auto;
-    border:2px solid cyan;
     pointer-events: none;
 }
 
 .camera-overlay{
     position: absolute;
-    top:300px;
-    left:50%;
     width:500px;
     height:240px;
+    top:0;
+    left:0;
     
     mix-blend-mode: overlay;
     margin: auto;
-    border:2px solid red;
     background-size:cover;
     background-image:url("../images/overlay-cam.png");
-    z-index:2000;
+    z-index:99;
     pointer-events: none;
 }
 
@@ -124,7 +124,6 @@
     top:10px;
     z-index:99999;
     width:100%;
-    background:red;
     text-align: center;
 
     h2{
@@ -149,6 +148,23 @@
 
 }
 
+.time{
+    position: absolute;
+    text-align: center;
+    width:100%;
+    z-index:99999;
+    bottom:5vh;
+    
+    .tell_time{
+        font-size:1em;
+        font-family: mrs-eaves-xl-serif, serif;
+    }
+
+    .tell_time::after{
+        content: "°";
+    }
+
+}
 
 /* SPACES */
 

@@ -44,38 +44,100 @@ var letters = (function(){
         sendLetter();
         
     }
+    
+    function listen(){
+        
+    google.maps.addListener(map, 'moveend', function() {
+      var center = map.getCenter();
+      var zoom = map.getZoom();
+
+      alert([center.lat(), center.lng(), zoom].join(','));
+    });
+        
+    }
 
 
     function _findPlace(){
+        
         var geocoder = new google.maps.Geocoder();
+        
         var address = document.getElementById("field_loc").value;
+        
         geocoder.geocode( { 'address': address}, function(results, status) {
           if (status == google.maps.GeocoderStatus.OK)
           {
 
               const place = results[0];
               const place_loc = place.geometry.viewport;
-
+              
               console.log(place);
-              console.log(place.address_components[0].short_name);
-              curr_location_name = place.address_components[0].short_name;
-              $("#loc_name").text(place.address_components[0].short_name);
+             
+             
+              // change name so that it focuses on neighbourhood, city, or route //ignore street number
+              
             
               
               var place_center = {lat: place_loc.pa.h, lng: place_loc.ka.h};
-
-            
-            letters.curr_location = {lat: place_loc.pa.h, lng: place_loc.ka.h};
+              
+              letters.curr_location = {lat: place_loc.pa.h, lng: place_loc.ka.h};
 
             console.log(place_center);
+              
+              $("#loc_name").text(place.address_components[0].short_name); 
+            $("#loc_lat").text(place_center.lat);
+            $("#loc_lng").text(place_center.lng);
 
              var map = new google.maps.Map(document.getElementById('map'), {
                 center: place_center,
                 zoom: 19
               });
+              
+              
+              /* Search Street View */
 
-
-
+              var sv = new google.maps.StreetViewService();
+              
+              var panoRequest = {
+                  location: place_center,
+                  preference: google.maps.StreetViewPreference.NEAREST,
+                  radius: 50,
+                  source: google.maps.StreetViewSource.OUTDOOR
+              }
+              
+              var findPanorama = function(radius) {
+                  panoRequest.radius = radius;
+                  sv.getPanorama(panoRequest, function(panoData, status){
+                      if(status === google.maps.StreetViewStatus.OK){
+                          
+                          
+                        var panorama = new google.maps.StreetViewPanorama(
+              document.getElementById('map'),
+                          {
+                              pano: panoData.location.pano
+                          });
+                      } else{
+                          findPanorama(radius + 5);
+                      }
+                      }
+                  )};
+              
+              findPanorama(50);
+              /*
+              
+              var panorama = new google.maps.StreetViewPanorama(
+              document.getElementById('map'), {
+                position: place_center,
+                pov: {
+                  heading: 34,
+                  pitch: 10
+                }
+              });
+              
+              sv.getPanorama({location: place_center, radius: 100});
+              
+              map.setStreetView(panorama);*/
+              
+          /*
           var panorama = new google.maps.StreetViewPanorama(
               document.getElementById('map'), {
                 position: place_center,
@@ -85,7 +147,7 @@ var letters = (function(){
                 }
               });
 
-          map.setStreetView(panorama); 
+          map.setStreetView(panorama); */
 
       }});
         
@@ -105,22 +167,54 @@ var letters = (function(){
           
       });
         
+        
+    // update letter count in database
+    database.ref('letters-overview/count').transaction(function(counts) {
+        
+    let new_count = (counts || 0) + 1;
+    return new_count;
+        
+  });
+        
         console.log("\nsent!");
     }
     
     
-    /* SEARCHING LETTERS */
+    
+    
+    /* FIND LETTER */
     
     // find letter brings you to a space somewhere in the world. this is a core concept borrowed from space email.
     
     function findLetter(){
+        let letter_count;
+        let rand;
+        
+        database.ref('letters-overview/count').once('value').then(function(snapshot) {
+            letter_count = snapshot.val();
+            
+            rand = Math.floor(Math.random() * letter_count);
+        
+            console.log(letter_count + " " + rand);
+            
+            database.ref('letters/').limitToFirst(rand).limitToLast(1).once('value').then(function (snapshsot) {
+                
+            });
+            
+        });
         
     }
+    
+    
+    
+    
     
     return{
         _saveImage: _saveImage,
         _findPlace: _findPlace,
-        sendLetter: sendLetter
+        sendLetter: sendLetter,
+        findLetter: findLetter,
+        listen: listen
     }
     
 
