@@ -23,14 +23,12 @@ function _initialize() {
     }
 
 
+
+
 var letters = (function(){
     
-    var curr_location = {
-        lat: 41.309327,
-        lng: -72.929250
-    }
-    
-    var curr_location_name = $("#field_loc").val();
+    var curr_location;
+    var curr_location_name = $("#loc_name").val();
     
      function _saveImage() {
        
@@ -56,16 +54,18 @@ var letters = (function(){
           {
 
               const place = results[0];
-              const place_loc = place.geometry.bounds;
+              const place_loc = place.geometry.viewport;
 
               console.log(place);
               console.log(place.address_components[0].short_name);
               curr_location_name = place.address_components[0].short_name;
               $("#loc_name").text(place.address_components[0].short_name);
-              console.log(place_loc.g + ", " + place_loc.h);
+            
+              
+              var place_center = {lat: place_loc.pa.h, lng: place_loc.ka.h};
 
-             var place_center = {lat: place_loc.pa.h, lng: place_loc.ka.h};
-              curr_location = place_center;
+            
+            letters.curr_location = {lat: place_loc.pa.h, lng: place_loc.ka.h};
 
             console.log(place_center);
 
@@ -91,20 +91,30 @@ var letters = (function(){
         
     }
     
+    
     function sendLetter() {
       database.ref('letters/' + Math.floor(Date.now() /1000)).set({
         id: Math.floor(Date.now() /1000),
         time: Math.floor(Date.now() /1000),
-        text: $("#my_words").text(),
+        text: $("#my_words").val(),
         location: {
-            lat: curr_location.lat,
-            lng: curr_location.lng,
-            name: curr_location_name
+            lat: letters.curr_location.lat,
+            lng: letters.curr_location.lng,
+            name: $("#loc_name").text()
         }
           
       });
         
         console.log("\nsent!");
+    }
+    
+    
+    /* SEARCHING LETTERS */
+    
+    // find letter brings you to a space somewhere in the world. this is a core concept borrowed from space email.
+    
+    function findLetter(){
+        
     }
     
     return{

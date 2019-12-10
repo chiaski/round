@@ -115,29 +115,38 @@
     font-family:"Ogg";
 }
 
-input[type=text]{
-    width:200px;
-    padding:1em;
-}
-
-button{
-    padding:1em;
-    background:#fff;
-    color:#000;}
-
 
 /* TRAVEL */
 
 
 .travel-place{
-    position: fixed;
+    position: absolute;
     top:10px;
     z-index:99999;
     width:100%;
+    background:red;
     text-align: center;
-    display:flex;
-    align-content: center;
-    align-items: center;
+
+    h2{
+        font-size:.9em;
+        margin:0;
+    }
+    
+
+    input[type=text]{
+        width:200px;
+        padding:1em;
+        margin:0;
+    }
+
+    button{
+        padding:1em;
+        background:#fff;
+        color:#000;
+        margin:0;
+    }
+
+
 }
 
 
