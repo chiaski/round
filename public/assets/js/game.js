@@ -55,6 +55,21 @@ var letters = (function(){
                   linksControl: false,
                     panControl: true
               });
+        
+          
+        letters.panorama.addListener('position_changed', function() {
+            console.log(letters.panorama.getPosition());
+                              
+            letters.curr_location = {
+                lat: letters.panorama.getPosition().lat(),
+                lng: letters.panorama.getPosition().lng()
+                             
+            };
+                              
+            $("#loc_lat").text(letters.curr_location.lat);
+            $("#loc_lng").text(letters.curr_location.lng);
+                              
+        });
          
             letters.map.setStreetView(letters.panorama);
         }
@@ -88,7 +103,7 @@ var letters = (function(){
         
         letters.panorama.setVisible(true);
         
-        letters.map.setStreetView(letters.panorama);
+        //letters.map.setStreetView(letters.panorama);
     }
     
     
@@ -137,14 +152,10 @@ var letters = (function(){
             $("#loc_name").text(place.address_components[0].short_name); 
               $("#loc_lat").text(place_center.lat);
               $("#loc_lng").text(place_center.lng);
-
-             var map = new google.maps.Map(document.getElementById('map'), {
-                center: place_center,
-                zoom: 19
-              });
-              
               
               /* Search Street View */
+
+                letters.map.setCenter(place_center);
 
               var sv = new google.maps.StreetViewService();
               
@@ -162,17 +173,8 @@ var letters = (function(){
                           
                         letters.panorama = new google.maps.StreetViewPanorama(
               document.getElementById('map'),
-                          {
-                              pano: panoData.location.pano
-                          });
-                          
-                          letters.panorama.addListener('position_changed', function() {
-                              console.log(letters.panorama.getPosition());
-                              
-                          $("#loc_lat").text(letters.panorama.getPosition().lat());
-                          $("#loc_lng").text(letters.panorama.getPosition().lng());
-                              
-                            });
+                          { pano: panoData.location.pano });
+                        
                           
                       } else{
                           findPanorama(radius + 50);
