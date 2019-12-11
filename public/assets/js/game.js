@@ -95,7 +95,8 @@ var letters = (function () {
 
         });
         
-        $(".time").fadeIn("slow");
+        $("#my_words").fadeIn(3400);
+        $(".time").fadeIn(5000);
 
         letters.map.setStreetView(letters.panorama);
     }
@@ -333,7 +334,7 @@ var letters = (function () {
 
             database.ref('letters/').child(rand).once('value').then(function (snapshot) {
 
-                // set view
+                // set view≈
                 letters.setLoc(snapshot.child("location").val(), snapshot.child("view").val());
             });
 
