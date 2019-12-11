@@ -160,7 +160,7 @@
     .tell_time{
         font-size:1em;
         text-align: center;
-        max-width:5ch; // trunchate after 5 ch
+        max-width:5ch !important; // trunchate after 5 ch
     }
 
     .tell_time::after{

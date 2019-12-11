@@ -24,6 +24,17 @@ function _initialize() {
 
 
 
+// user prompts
+var prompts = [
+    "Tell me about where you felt you could die.",
+    "Where's the closest place to home you have now?",
+    "Somewhere you want to be.",
+    "Where were you yesterday?",
+    "Where do you want to be tomorrow?",
+    "Where you think they could be?",
+    "Where you would be fine with losing everything"
+];
+
 
 var letters = (function(){
     
@@ -31,6 +42,7 @@ var letters = (function(){
     // official instances
     var map;
     var panorama;
+    var sv;
     
     var curr_location;
     var curr_location_name = $("#loc_name").val();
@@ -38,13 +50,13 @@ var letters = (function(){
 
     /* LOAD MAP */
     function initialize() {
-          var fenway = {lat: 41.309327, lng: -72.929250};
+        var fenway = {lat: 41.309327, lng: -72.929250};
             letters.map = new google.maps.Map(document.getElementById('map'), {
             center: fenway,
             zoom: 14
           });
 
-          letters.panorama = new google.maps.StreetViewPanorama(
+        letters.panorama = new google.maps.StreetViewPanorama(
               document.getElementById('map'), {
                 position: fenway,
                 pov: {
@@ -57,6 +69,7 @@ var letters = (function(){
               });
         
           
+        letters.sv = new google.maps.StreetViewService();
         letters.panorama.addListener('position_changed', function() {
             console.log(letters.panorama.getPosition());
                               
@@ -65,9 +78,16 @@ var letters = (function(){
                 lng: letters.panorama.getPosition().lng()
                              
             };
+
+        $("#loc_lat").text(letters.curr_location.lat);
+        $("#loc_lng").text(letters.curr_location.lng);
                               
-            $("#loc_lat").text(letters.curr_location.lat);
-            $("#loc_lng").text(letters.curr_location.lng);
+        $("#loc_lat").text(function(){   
+            return $(this).text().substring(0,7);
+        });        
+        $("#loc_lng").text(function(){   
+            return $(this).text().substring(0,8);
+        });
                               
         });
          
@@ -83,10 +103,12 @@ var letters = (function(){
         console.log(view);
         
         letters.curr_location = {lat: location.lat, lng: location.lng};
+        console.log(letters.curr_location);
         
+
        // letters.map.setCenter(new google.maps.LatLng(location.lat, location.lng));
         
-        letters.map.setCenter({
+        /* letters.map.setCenter({
             lat: location.lat,
             lng: location.lng
         });
@@ -94,14 +116,41 @@ var letters = (function(){
         letters.panorama.setPosition({
             lat: location.lat,
             lng: location.lng
-        });
+        });*/
         
-        letters.panorama.setPov({
-            heading: view.heading,
-            pitch: view.pitch
-        });
         
-        letters.panorama.setVisible(true);
+        $("#loc_name").text(location.name);
+        delete location.name;
+        
+        letters.sv.getPanorama({location: location, radius: 300}, processSV);
+        
+        function processSV(data, status){
+            if(status === 'OK'){
+                console.log("nice");
+            }
+
+           
+            console.log(data);
+            letters.panorama.setPosition(data.location.latLng);
+            letters.panorama.setPano(data.location.Pano);
+            letters.panorama.setPov({
+                heading: view.heading,
+                pitch: view.pitch
+            });
+
+        $("#loc_lat").text(letters.curr_location.lat);
+        $("#loc_lng").text(letters.curr_location.lng);
+                              
+        $("#loc_lat").text(function(){   
+            return $(this).text().substring(0,7);
+        });        
+        $("#loc_lng").text(function(){   
+            return $(this).text().substring(0,8);
+        });
+            
+            letters.panorama.setVisible(true);
+        }
+        
         
         //letters.map.setStreetView(letters.panorama);
     }
@@ -140,7 +189,6 @@ var letters = (function(){
               
               console.log(place);
              
-             
               // change name so that it focuses on neighbourhood, city, or route //ignore street number   
               
               var place_center = {lat: place_loc.pa.h, lng: place_loc.ka.h};
@@ -149,15 +197,13 @@ var letters = (function(){
 
               console.log(place_center);
               
-            $("#loc_name").text(place.address_components[0].short_name); 
+              $("#loc_name").text(place.address_components[0].short_name); 
               $("#loc_lat").text(place_center.lat);
               $("#loc_lng").text(place_center.lng);
               
               /* Search Street View */
 
                 letters.map.setCenter(place_center);
-
-              var sv = new google.maps.StreetViewService();
               
               var panoRequest = {
                   location: place_center,
@@ -168,7 +214,8 @@ var letters = (function(){
               
               var findPanorama = function(radius) {
                   panoRequest.radius = radius;
-                  sv.getPanorama(panoRequest, function(panoData, status){
+                  
+                  letters.sv.getPanorama(panoRequest, function(panoData, status){
                       if(status === google.maps.StreetViewStatus.OK){
                           
                         letters.panorama = new google.maps.StreetViewPanorama(
@@ -264,11 +311,8 @@ var letters = (function(){
             
             database.ref('letters/').child(rand).once('value').then(function (snapshot) {
                 
-                
-                console.log(snapshot.val());
-                
                 // set view
-                letters.setLoc(snapshot.child("location").val(), snapshot.child("view").val());
+            letters.setLoc(snapshot.child("location").val(), snapshot.child("view").val());
             });
             
         });
