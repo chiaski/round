@@ -46,11 +46,11 @@
                     <br>
 
 
-                    <input type="text" id="field_loc" name="location" placeholder="New Haven" value="New Heaven">
+                    <input type="text" id="field_loc" name="location" placeholder="Tell me a place">
 <br>
                     <button type="button" class="find" onclick="letters._findPlace()">search</button>
 
-                    <button type="button" onclick="letters._saveImage()">remember</button>
+                    <button type="button" class="remember" onclick="letters._saveImage()">remember</button>
                     
 
                     <!--
@@ -75,7 +75,8 @@
             
             <div class="the-guide">When you are sure of your choice, please <em>remember</em> it.</div>
             <div class="the-question" style="display:;">Where do you want to go after everything?</div>
-            <div class="please"></div>
+            
+            <div class="please">dgaskdmgslaskdmglksagm</div>
         </div>
 
         <div class="map-overlay" style="pointer-events: none;"></div>
@@ -116,6 +117,7 @@
 
 
     <script type="text/javascript">
+        
         var standard_message = $('#my_words').val();
         $('#my_words').focus(
             function() {
@@ -138,14 +140,14 @@
         
       $(function () {
         var socket = io();
-        $('.find').click(function(){
-            alert("youre gay!");
+          
+        $('.remember').click(function(){
           socket.emit('message', $('#my_words').val());
           $('#my_words').val('');
+            
           return false;
         });
         socket.on('message', function(msg){
-            
             
             // delete random if more than n
             if($('div.please').length >= 9){
@@ -156,7 +158,7 @@
                  $("div.please").eq(r).fadeOut(5000);
             }
             
-            
+            alert(msg);
             $(".please").first().clone().text(msg).css({
                 left:  Math.floor( Math.random() * 1000 ),
                 top:  Math.floor( Math.random() * 1000 ),   

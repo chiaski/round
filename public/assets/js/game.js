@@ -88,8 +88,10 @@ var letters = (function () {
 
         });
     
-        letters.count_remembered = 0;
+        $(".the-guide").fadeIn(4000);
+        $(".the-question").delay(4000).fadeIn(4000);
         
+        letters.count_remembered = 0;
         letters.intro();
         
         $("#my_words").fadeIn(3400);
@@ -120,7 +122,7 @@ var letters = (function () {
                     "Where were you yesterday?",
                     "Where do you want to be tomorrow?",
                     "Where you think they could be?",
-                    "Where you would be fine with losing everything",
+                    "Where you would be fine with losing everything?",
                     "Are you afraid of someplace?",
                     "Do you not want to go there again?",
                     "Have you been dreaming of a place since you were a child?",
@@ -147,6 +149,7 @@ var letters = (function () {
             }
             
             $(".the-question").text(_select(prompts)).fadeIn(2000);
+            $(".travel-place").fadeIn(5000);
             
     }
 
