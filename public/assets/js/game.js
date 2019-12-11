@@ -151,6 +151,11 @@ var letters = (function () {
             $(".the-question").hide().text(_select(prompts)).delay(7000).fadeIn(2000);
             $(".travel-place").fadeIn(3000);
             
+            
+            var obj = document.createElement("audio");
+                obj.src = "https://chia.dev/create/lettered/postcard.mp3"; 
+                obj.play(); 
+            
     }
 
 
