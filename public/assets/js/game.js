@@ -27,8 +27,11 @@ function _initialize() {
 
 var letters = (function(){
     
+    
+    
     var curr_location;
     var curr_location_name = $("#loc_name").val();
+    
     
      function _saveImage() {
        
@@ -73,19 +76,17 @@ var letters = (function(){
               console.log(place);
              
              
-              // change name so that it focuses on neighbourhood, city, or route //ignore street number
-              
-            
+              // change name so that it focuses on neighbourhood, city, or route //ignore street number   
               
               var place_center = {lat: place_loc.pa.h, lng: place_loc.ka.h};
               
               letters.curr_location = {lat: place_loc.pa.h, lng: place_loc.ka.h};
 
-            console.log(place_center);
+              console.log(place_center);
               
-              $("#loc_name").text(place.address_components[0].short_name); 
-            $("#loc_lat").text(place_center.lat);
-            $("#loc_lng").text(place_center.lng);
+            $("#loc_name").text(place.address_components[0].short_name); 
+              $("#loc_lat").text(place_center.lat);
+              $("#loc_lng").text(place_center.lng);
 
              var map = new google.maps.Map(document.getElementById('map'), {
                 center: place_center,
@@ -109,33 +110,31 @@ var letters = (function(){
                   sv.getPanorama(panoRequest, function(panoData, status){
                       if(status === google.maps.StreetViewStatus.OK){
                           
-                          
                         var panorama = new google.maps.StreetViewPanorama(
               document.getElementById('map'),
                           {
                               pano: panoData.location.pano
                           });
+                          
+                          panorama.addListener('position_changed', function() {
+                              console.log(panorama.getPosition());
+                              
+                          $("#loc_lat").text(panorama.getPosition().lat());
+                          $("#loc_lng").text(panorama.getPosition().lng());
+                              
+                            });
+                          
                       } else{
                           findPanorama(radius + 5);
                       }
                       }
+                        
                   )};
               
               findPanorama(50);
-              /*
               
-              var panorama = new google.maps.StreetViewPanorama(
-              document.getElementById('map'), {
-                position: place_center,
-                pov: {
-                  heading: 34,
-                  pitch: 10
-                }
-              });
               
-              sv.getPanorama({location: place_center, radius: 100});
-              
-              map.setStreetView(panorama);*/
+          
               
           /*
           var panorama = new google.maps.StreetViewPanorama(
@@ -155,6 +154,10 @@ var letters = (function(){
     
     
     function sendLetter() {
+        var heading = google.maps.geometry.spherical.computeHeading(ManLatLng, whereToLookLatLng);
+        var pov = panorama.getPov();
+        pov.heading = heading;
+        
       database.ref('letters/' + Math.floor(Date.now() /1000)).set({
         id: Math.floor(Date.now() /1000),
         time: Math.floor(Date.now() /1000),

@@ -4,16 +4,19 @@
     <meta charset="UTF-8">
     <title>title</title>
     <link rel="stylesheet" href="assets/styling/main.css">
+
       
-      <script src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js'></script>
+      <script src="./assets/js/util/socket.io.js"></script>  
+      <script src="./assets/js/util/p5.min.js"></script>  
+      <script src="./assets/js/util/dom-to-image.min.js"></script>  
       
-      <script src="./assets/js/p5.min.js"></script>  
+    <script type="text/javascript" src="assets/js/util/html2canvas.min.js"></script>
+      
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/addons/p5.dom.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/addons/p5.sound.min.js">
   </script>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script> 
       
-  <script src="https://threejs.org/build/three.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script> 
       
   <script src="./assets/js/main.js"></script>
   <script src="./assets/js/draw.js"></script>
@@ -58,7 +61,6 @@
               
               <div class="map-overlay" style=""></div>
               
-              
               <div id="map" style="">
               
               </div>
@@ -93,7 +95,7 @@
       
  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAq7DNXbXovJQsc6InqHtJelNBuG7IekWo&callback=initialize"
   type="text/javascript"></script>
-    <script type="text/javascript" src="assets/js/html2canvas.min.js"></script>
+      
       
     <script async defer src="assets/js/game.js"></script>
       
@@ -127,9 +129,6 @@
    else if (window.attachEvent) window.attachEvent("onload", autorun);
    else window.onload = autorun;
   </script>
-      
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script>
-      
       
       <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/7.5.2/firebase-app.js"></script>
