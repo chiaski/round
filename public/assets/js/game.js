@@ -33,10 +33,13 @@ var letters = (function () {
     var map;
     var panorama;
     var sv;
+    
+    var count_remembered;
 
     var curr_location;
     var curr_location_name = $("#loc_name").val();
 
+    
 
     /* LOAD MAP */
     function initialize() {
@@ -84,10 +87,30 @@ var letters = (function () {
             });
 
         });
+    
+        letters.count_remembered = 0;
         
-        // introduction sequence asks user for 3 prompts
+        letters.intro();
+        
+        $("#my_words").fadeIn(3400);
+        $(".time").fadeIn(5000);
+        
+
+        letters.map.setStreetView(letters.panorama);
+    }
+    
+    
+      // introduction sequence asks user for 3 prompts
         
         function intro(){
+            
+            // done
+            if(letters.count_remembered >= 5){
+                console.log("Done with introduction!");
+                $(".the-guide").remove();
+                $(".the-question").fadeOut("slow");
+                return;
+            }
             
                 // user prompts
                 var prompts = [
@@ -100,31 +123,31 @@ var letters = (function () {
                     "Where you would be fine with losing everything",
                     "Are you afraid of someplace?",
                     "Do you not want to go there again?",
-                    "Have you been dreaming of a place since you were a child?"
+                    "Have you been dreaming of a place since you were a child?",
+                    "Where do you want to go after everything?",
+                    "Where should you have said it?",
+                    "Some place you've never even thought about.",
+                    "Where did you grow up?",
+                    "Where did you really grow up?",
+                    "Where would you like to die?",
+                    "Despite everything, where would you go?",
+                    "Where do you need to send a letter to?"
                 ];
             
             
             function _select(arr){
                 var copy = arr.slice(0);
-                return function(){
+                
                     if(copy.length < 1){ copy = arr.slice(0); }
                     
                     let i = Math.floor(Math.random() * copy.length);
                     var item = copy[i];
                     copy.splice(i, 1);
                     return item;
-                };
             }
-
-
             
-        }
-        
-        
-        $("#my_words").fadeIn(3400);
-        $(".time").fadeIn(5000);
-
-        letters.map.setStreetView(letters.panorama);
+            $(".the-question").text(_select(prompts)).fadeIn(2000);
+            
     }
 
 
@@ -198,7 +221,17 @@ var letters = (function () {
     /* ACTS */
 
     function _saveImage() {
-
+        
+        if(letters.count_remembered < 5){
+            // counter for initial 3
+            letters.count_remembered += 1;
+            letters.intro();
+        } else{
+            $(".the-question").fadeOut(2500);
+        }
+        
+        $("#my_words").val("");
+             
         /* Append image to a div */
         domtoimage.toPng(document.getElementById('paint')).then(function (dataUrl) {
             var img = new Image();
@@ -311,9 +344,6 @@ var letters = (function () {
         database.ref('letters-overview/count').transaction(function (counts) {
 
             let new_count = counts + 1;
-            console.log("new:" + new_count);
-
-            console.log(new_count);
 
             database.ref('letters/' + new_count + "").set({
                 id: new_count,
@@ -389,7 +419,8 @@ var letters = (function () {
         _findPlace: _findPlace,
         sendLetter: sendLetter,
         findLetter: findLetter,
-        setLoc: setLoc
+        setLoc: setLoc,
+        intro: intro
     }
 
 

@@ -48,10 +48,10 @@
 
                     <input type="text" id="field_loc" name="location" placeholder="New Haven" value="New Heaven">
 <br>
-                    <button type="button" class="find" onclick="letters._findPlace()">find</button>
+                    <button type="button" class="find" onclick="letters._findPlace()">search</button>
 
-                    <button type="button" onclick="letters._saveImage()">save</button>
-                    <br><br>
+                    <button type="button" onclick="letters._saveImage()">remember</button>
+                    
 
                     <!--
   <input type="text" name="custom_color" placeholder="#ff0000" id="pickcolor" class="call-picker" />
@@ -73,6 +73,8 @@
             <div id="map"> </div>
             
             
+            <div class="the-guide">When you are sure of your choice, please <em>remember</em> it.</div>
+            <div class="the-question" style="display:;">Where do you want to go after everything?</div>
             <div class="please"></div>
         </div>
 
@@ -86,7 +88,7 @@
 
             <div class="words">
 
-                <textarea id="my_words" placeholder="where are the peopel you know">do you remember me? do you remember me?do you remember me?do you remember me?
+                <textarea id="my_words" placeholder="where are the peopel you know">
                   </textarea>
             </div>
 
@@ -119,12 +121,16 @@
             function() {
                 if ($(this).val() == standard_message)
                     $(this).val("");
+                
+                $(".the-question").fadeOut();
             }
         );
         $('#my_words').blur(
             function() {
                 if ($(this).val() == "")
                     $(this).val(standard_message);
+                
+                $(".the-question").fadeIn("slow");
             }
         );
         

@@ -41,6 +41,7 @@
 }
 
 #photo{
+    display:none;
     position: absolute;
     top:0; left: 0;
     padding:5vw;
@@ -145,7 +146,7 @@
         width:30vw; 
         text-align: center;
         font-size:2em;
-        padding:.5em;
+        padding:.3em;
         margin:0;
         background: none;
         border:none;
@@ -202,7 +203,23 @@ h1{
     text-align: center;
 }
 
-.question{
+
+.the-guide{
+    
+    position: fixed;
+    top:22vh;
+    padding:1em;
+    text-shadow:0 0 5px #292121;
+    font-family: mrs-eaves-xl-serif-narrow, serif;
+    font-weight: 400;
+    width:100%;
+    text-align: center;
+    z-index:5;
+    pointer-events: none;
+    
+}
+
+.the-question{
     
     position: fixed;
     max-width:100%; max-height:100%;
@@ -210,8 +227,15 @@ h1{
     -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
     margin:auto;
-    font-size:18px;
-    z-index:9999;
+    font-size:4.5em;
+    z-index:2;
+    color:#eee;
+    pointer-events: none;
+    text-align: center;
+    font-family: mrs-eaves-xl-serif-narrow, serif;
+    font-weight: 400;
+    font-style: italic;
+    filter: blur(0.5px);
 }
 
 .please{
