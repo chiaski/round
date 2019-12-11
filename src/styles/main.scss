@@ -16,16 +16,13 @@
     width:100%;
 }
 
-#box{
-    z-index:9999;
-}
-
 
 #map{
+    pointer-events: all;
     position: absolute;
-    width:100%;
+    width:100vw;
     height:100vh;
-    z-index:2;
+    z-index:599;
     background-size:cover;
     background-image:url("../images/test.png");
   -webkit-filter: blur(2px) grayscale(90%); /* Safari 6.0 - 9.0 */
@@ -42,28 +39,33 @@
     background-image:url("../images/overlay.png");
     mix-blend-mode: screen;
     pointer-events: none;
+    display:none;
+
 }
 
 #photo{
     position: absolute;
-    top:100vh;
-    margin:2em;
+    top:0; left: 0;
+    padding:5vw;
     box-sizing: border-box;
-//  /  background:cyan;
-    max-height:300px;
+    width:100vw;
+    height:100vh;
     overflow:hidden;
     z-index:99;
+    background: transparent;
 }
 
 #paint{
     position: absolute;
-    z-index:10;
-    
+    z-index:99;
+    top:10vh;
+    background:yellow;
+   // background: transparent;
     mix-blend-mode: screen;
     pointer-events: none;
  //   border:10px solid yellow;
-    height:100vh;
-    top:0;
+    height:40vh;
+    pointer-events:none;
 }
 
 .camera{
@@ -95,7 +97,7 @@
 
 .words{
     // use this when i have to center shit
-    position: absolute;
+    position: fixed;
     max-width:100%; max-height:100%;
     left: 50%; top: 50%;
     -webkit-transform: translate(-50%, -50%);
@@ -105,6 +107,7 @@
     z-index:9999;
 
     textarea{
+        margin-top:5vh;
         z-index:99 !important;
         width:40vw;
         border:0;
@@ -129,23 +132,39 @@
     z-index:99999;
     width:100%;
     text-align: center;
+    font-family: big-caslon-fb, serif;
+    font-weight: 700;
+    font-weight: 700;
+    font-style: italic;
 
     h2{
-        font-size:.9em;
+        font-size:1.3em;
         margin:0;
     }
     
 
     input[type=text]{
-        width:200px;
-        padding:1em;
+        font-family: miller-banner, serif;
+        width:30vw; 
+        text-align: center;
+        font-size:1.4em;
+        padding:.5em;
         margin:0;
+        background: none;
+        border:none;
+        color:#fff;
+    }
+    
+    input:focus{
+        color:red;
+        font-style: italic;
+        text-shadow:0 5px 20px #fff !important;
     }
 
     button{
+        display:inline-block;
         padding:1em;
-        background:#fff;
-        color:#000;
+        color:#fff;
         margin:0;
     }
 

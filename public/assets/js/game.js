@@ -69,7 +69,8 @@ var letters = (function () {
 
                 },
                 linksControl: false,
-                panControl: true
+                panControl: true,
+                disableDefaultUI: true
             });
 
 
@@ -322,8 +323,13 @@ var letters = (function () {
     // find letter brings you to a space somewhere in the world. this is a core concept borrowed from space email.
 
     function findLetter() {
+        
+        
         let letter_count;
         let rand;
+        
+        $(".travel-place").fadeOut("slow");
+        $("#my_words").fadeOut(2500).delay(2000);
 
         database.ref('letters-overview/count').once('value').then(function (snapshot) {
             letter_count = snapshot.val();
@@ -336,9 +342,16 @@ var letters = (function () {
 
                 // set view≈
                 letters.setLoc(snapshot.child("location").val(), snapshot.child("view").val());
+                
+                $("#my_words").text(snapshot.child("text").val());
+                
             });
+            
 
         });
+        
+         $("#my_words").fadeIn(3000);
+        $(".travel-place").delay(8000).fadeIn(3000);
 
     }
 

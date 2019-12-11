@@ -21,7 +21,7 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
 
     <script src="./assets/js/main.js"></script>
-    <script src="./assets/js/draw.js"></script>
+ <!--   <script src="./assets/js/draw.js"></script> -->
 
     <script src="assets/js/game.js"></script>
 
@@ -42,12 +42,12 @@
 
             <center>
                 <div class="travel-place">
-                    <h2>Close your eyes and hope to be brought somewhere like <span id="loc_name">...</span></h2>
+                    <h2> <span id="loc_name">...</span></h2>
                     <br>
 
 
                     <input type="text" id="field_loc" name="location" placeholder="New Haven" value="New Heaven">
-
+<br>
                     <button type="button" onclick="letters._findPlace()">find</button>
 
                     <button type="button" onclick="letters._saveImage()">save</button>
@@ -64,18 +64,20 @@
             </center>
 
 
-            <div id="map" style="">
+        </div> 
+        
+        <div class="box" style="position:absolute;top:0;">
             <div class="map-overlay" style=""></div>
-
-            </div>
+            <div id="map"> </div>
         </div>
 
+        
 
-        <div class="box" id="paint">
+        <div class="box" id="paint" style="background:transparent;">
 
             <div class="words">
 
-                <textarea id="my_words" placeholder="where are the peopel you know">do you remember me?
+                <textarea id="my_words" placeholder="where are the peopel you know">do you remember me? do you remember me?do you remember me?do you remember me?
                   </textarea></div>
 
             <div id="camera" class="camera">

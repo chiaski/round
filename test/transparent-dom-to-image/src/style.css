@@ -1,0 +1,39 @@
+#test-1 {
+  float:left;
+  width:400px;
+  background-color:transparent;
+}
+
+#test-1 img {
+  float:left;
+  width:100%;
+  height:auto;
+}
+
+#test-2 {
+  float:left;
+  width:400px;
+  height:300px;
+  background-color:transparent;
+}
+
+#test-3 {
+  float:left;
+  width:400px;
+  height:300px;
+}
+
+p {
+  color:red;
+}
+
+#result {
+  float:left;
+  width:100%;
+  background-image:url("./bg.jpg");
+  background-size:cover;
+}
+
+#result img {
+  float:left;
+}
