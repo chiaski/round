@@ -28,10 +28,71 @@ function _initialize() {
 var letters = (function(){
     
     
+    // official instances
+    var map;
     var panorama;
+    
     var curr_location;
     var curr_location_name = $("#loc_name").val();
+
+
+    /* LOAD MAP */
+    function initialize() {
+          var fenway = {lat: 41.309327, lng: -72.929250};
+            letters.map = new google.maps.Map(document.getElementById('map'), {
+            center: fenway,
+            zoom: 14
+          });
+
+          letters.panorama = new google.maps.StreetViewPanorama(
+              document.getElementById('map'), {
+                position: fenway,
+                pov: {
+                  heading: 34,
+                  pitch: 10,
+
+                },
+                  linksControl: false,
+                    panControl: true
+              });
+         
+            letters.map.setStreetView(letters.panorama);
+        }
     
+
+    /* MAIN */
+    
+    function setLoc(location, view){
+        
+        console.log(location);
+        console.log(view);
+        
+        letters.curr_location = {lat: location.lat, lng: location.lng};
+        
+       // letters.map.setCenter(new google.maps.LatLng(location.lat, location.lng));
+        
+        letters.map.setCenter({
+            lat: location.lat,
+            lng: location.lng
+        });
+        
+        letters.panorama.setPosition({
+            lat: location.lat,
+            lng: location.lng
+        });
+        
+        letters.panorama.setPov({
+            heading: view.heading,
+            pitch: view.pitch
+        });
+        
+        letters.panorama.setVisible(true);
+        
+        letters.map.setStreetView(letters.panorama);
+    }
+    
+    
+    /* ACTS */
     
      function _saveImage() {
        
@@ -47,7 +108,6 @@ var letters = (function(){
         sendLetter();
         
     }
-    
 
 
     function _findPlace(){
@@ -115,7 +175,7 @@ var letters = (function(){
                             });
                           
                       } else{
-                          findPanorama(radius + 5);
+                          findPanorama(radius + 50);
                       }
                       }
                         
@@ -147,31 +207,37 @@ var letters = (function(){
         
         let map_heading = letters.panorama.getPov().heading;
         let map_pitch = letters.panorama.getPov().pitch;
+        let time = Math.floor(Date.now() /1000);
         
-      database.ref('letters/' + Math.floor(Date.now() /1000)).set({
-        id: Math.floor(Date.now() /1000),
-        time: Math.floor(Date.now() /1000),
-        text: $("#my_words").val(),
-        location: {
-            lat: letters.curr_location.lat,
-            lng: letters.curr_location.lng,
-            name: $("#loc_name").text()
-        },
-        view: {
-            heading: map_heading,
-            pitch: map_pitch
-        }
-          
-      });
+        // update letter count in database
+        database.ref('letters-overview/count').transaction(function(counts) {
+
+            let new_count = counts + 1;
+            console.log("new:" + new_count);
+    
+            console.log(new_count);
+            
+            database.ref('letters/' + new_count + "").set({
+                id: new_count,
+                time: time,
+                text: $("#my_words").val(),
+                location: {
+                    lat: letters.curr_location.lat,
+                    lng: letters.curr_location.lng,
+                    name: $("#loc_name").text()
+                },
+                view: {
+                    heading: map_heading,
+                    pitch: map_pitch
+                }
+
+              });
+            
+            return new_count;
+
+        });
+               
         
-        
-    // update letter count in database
-    database.ref('letters-overview/count').transaction(function(counts) {
-        
-    let new_count = (counts || 0) + 1;
-    return new_count;
-        
-  });
         
         console.log("\nsent!");
     }
@@ -190,12 +256,17 @@ var letters = (function(){
         database.ref('letters-overview/count').once('value').then(function(snapshot) {
             letter_count = snapshot.val();
             
-            rand = Math.floor(Math.random() * letter_count);
+            rand = Math.floor(Math.random() * letter_count) + 1;
         
             console.log(letter_count + " " + rand);
             
-            database.ref('letters/').limitToFirst(rand).limitToLast(1).once('value').then(function (snapshsot) {
+            database.ref('letters/').child(rand).once('value').then(function (snapshot) {
                 
+                
+                console.log(snapshot.val());
+                
+                // set view
+                letters.setLoc(snapshot.child("location").val(), snapshot.child("view").val());
             });
             
         });
@@ -205,12 +276,13 @@ var letters = (function(){
     
     
     
-    
     return{
+        initialize: initialize,
         _saveImage: _saveImage,
         _findPlace: _findPlace,
         sendLetter: sendLetter,
-        findLetter: findLetter
+        findLetter: findLetter,
+        setLoc: setLoc
     }
     
 
