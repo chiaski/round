@@ -107,10 +107,9 @@ var letters = (function () {
         function intro(){
             
             // done
-            if(letters.count_remembered >= 3){
+            if(letters.count_remembered >= 4){
                 $("#my_words").attr('placeholder', 'What can space here do for you?');
                 console.log("Done with introduction!");
-                $(".the-guide").remove();
                 $(".the-question").fadeOut("slow");
                 return;
             }
@@ -149,8 +148,8 @@ var letters = (function () {
                     return item;
             }
             
-            $(".the-question").hide().text(_select(prompts)).delay(6000).fadeIn(2000);
-            $(".travel-place").fadeIn(5000);
+            $(".the-question").hide().text(_select(prompts)).delay(7000).fadeIn(2000);
+            $(".travel-place").fadeIn(3000);
             
     }
 
@@ -227,8 +226,12 @@ var letters = (function () {
     function _saveImage() {
         
         if(letters.count_remembered < 3){
+            
+            if(letters.count_remembered == 1){
+                $(".the-guide").fadeOut(2000).remove();
+            }
             // counter for initial 3
-            $(".the-question").fadeOut(5000).delay(5000);
+            $(".the-question").fadeOut(2000).delay(8000);
             $(".travel-place").fadeOut(4000);
             letters.count_remembered += 1;
             letters.intro();
