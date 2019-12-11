@@ -153,10 +153,6 @@ var letters = (function () {
             $(".travel-place").fadeIn(3000);
             
             
-            var obj = document.createElement("audio");
-                obj.src = "https://chia.dev/create/lettered/postcard.mp3"; 
-                obj.play(); 
-            
     }
 
 
