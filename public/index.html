@@ -48,7 +48,7 @@
 
                     <input type="text" id="field_loc" name="location" placeholder="New Haven" value="New Heaven">
 <br>
-                    <button type="button" onclick="letters._findPlace()">find</button>
+                    <button type="button" class="find" onclick="letters._findPlace()">find</button>
 
                     <button type="button" onclick="letters._saveImage()">save</button>
                     <br><br>
@@ -79,7 +79,7 @@
             <div class="words">
 
                 <textarea id="my_words" placeholder="where are the peopel you know">do you remember me? do you remember me?do you remember me?do you remember me?
-                  </textarea></div>
+                  </textarea><div class="please">fkmksgmdkms</div></div>
 
             <div id="camera" class="camera">
                 <div class="camera-overlay"></div>
@@ -118,6 +118,22 @@
                     $(this).val(standard_message);
             }
         );
+        
+        
+        
+      $(function () {
+        var socket = io();
+        $('.find').click(function(){
+            alert("youre gay!");
+          socket.emit('message', $('#my_words').val());
+          $('#my_words').val('');
+          return false;
+        });
+        socket.on('message', function(msg){
+          $('#my_words').text(msg);
+          $('.please').text(msg);
+        });
+      });
 
      
 

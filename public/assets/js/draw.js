@@ -20,7 +20,6 @@ function setup() {
 	// Start the socket connection
 	socket = io.connect(); 
     
-
 	// Getting our buttons and the holder through the p5.js dom
 	const color_picker = select('#pickcolor')
 	const color_btn = select('#color-btn')
@@ -35,7 +34,7 @@ function setup() {
 		strokeWeight(data.strokeWidth)
 		line(data.x, data.y, data.px, data.py)
 	})
-    
+
     
     
     

@@ -24,4 +24,11 @@ io.sockets.on('connection', (socket) => {
  socket.on('disconnect', () => console.log('Client has disconnected'))
 })
 
+
+io.on('connection', function(socket){
+  socket.on('message', function(msg){
+    io.emit('message', msg);
+  });
+});
+
 server.listen(process.env.PORT || 3000) // .listen('3000')
