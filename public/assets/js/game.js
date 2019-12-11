@@ -89,7 +89,8 @@ var letters = (function () {
         });
     
         $(".the-guide").delay(10000).fadeIn(4000);
-        $(".the-question").delay(4000).fadeIn(4000);
+        $(".the-question").delay(15000).fadeIn(4000);
+        $(".travel-place").delay(3000).fadeIn(3000);
         
         letters.count_remembered = 0;
         letters.intro();
