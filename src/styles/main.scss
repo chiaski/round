@@ -144,7 +144,7 @@
         font-family: miller-banner, serif;
         width:30vw; 
         text-align: center;
-        font-size:1.4em;
+        font-size:2em;
         padding:.5em;
         margin:0;
         background: none;
@@ -159,9 +159,13 @@
     }
 
     button{
+        mix-blend-mode: darken;
         display:inline-block;
         padding:1em;
         color:#fff;
+        background: none; border: none;
+        font-size:.8em;
+        text-shadow:0 0 20px #fff;
         margin:0;
     }
 
@@ -196,4 +200,14 @@
 
 h1{
     text-align: center;
+}
+
+.please{
+    position: absolute;
+    z-index: 5;
+    pointer-events: none;
+    filter:blur(1px);
+    max-width:20vw;
+    left:50vw;
+    top:30vh;
 }

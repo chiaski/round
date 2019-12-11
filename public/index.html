@@ -69,6 +69,7 @@
         
         <div class="box" style="position:absolute;top:0;">
             <div id="map"> </div>
+            <div class="please">fkmksgmdkms</div>
         </div>
 
         <div class="map-overlay" style="pointer-events: none;"></div>
@@ -79,7 +80,8 @@
             <div class="words">
 
                 <textarea id="my_words" placeholder="where are the peopel you know">do you remember me? do you remember me?do you remember me?do you remember me?
-                  </textarea><div class="please">fkmksgmdkms</div></div>
+                  </textarea>
+            </div>
 
             <div id="camera" class="camera">
                 <div class="camera-overlay"></div>
@@ -130,8 +132,23 @@
           return false;
         });
         socket.on('message', function(msg){
-          $('#my_words').text(msg);
-          $('.please').text(msg);
+            
+            
+            // delete random if more than n
+            if($('div.please').length >= 9){
+                alert("too many!");
+                
+                let r = Math.floor(Math.random() * $('div.please').length);
+                
+                 $("div.please").eq(r).fadeOut(5000);
+            }
+            
+            
+            $(".please").first().clone().text(msg).css({
+                left:  Math.floor( Math.random() * 1000 ),
+                top:  Math.floor( Math.random() * 1000 ),   
+            }).insertAfter(".please:last");
+            
         });
       });
 

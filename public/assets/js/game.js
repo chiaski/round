@@ -25,17 +25,6 @@ function _initialize() {
 
 
 
-// user prompts
-var prompts = [
-    "Tell me about where you felt you could die.",
-    "Where's the closest place to home you have now?",
-    "Somewhere you want to be.",
-    "Where were you yesterday?",
-    "Where do you want to be tomorrow?",
-    "Where you think they could be?",
-    "Where you would be fine with losing everything"
-];
-
 
 var letters = (function () {
 
@@ -95,6 +84,42 @@ var letters = (function () {
             });
 
         });
+        
+        // introduction sequence asks user for 3 prompts
+        
+        function intro(){
+            
+                // user prompts
+                var prompts = [
+                    "Tell me about where you felt you could die.",
+                    "Where's the closest place to home you have now?",
+                    "Somewhere you want to be.",
+                    "Where were you yesterday?",
+                    "Where do you want to be tomorrow?",
+                    "Where you think they could be?",
+                    "Where you would be fine with losing everything",
+                    "Are you afraid of someplace?",
+                    "Do you not want to go there again?",
+                    "Have you been dreaming of a place since you were a child?"
+                ];
+            
+            
+            function _select(arr){
+                var copy = arr.slice(0);
+                return function(){
+                    if(copy.length < 1){ copy = arr.slice(0); }
+                    
+                    let i = Math.floor(Math.random() * copy.length);
+                    var item = copy[i];
+                    copy.splice(i, 1);
+                    return item;
+                };
+            }
+
+
+            
+        }
+        
         
         $("#my_words").fadeIn(3400);
         $(".time").fadeIn(5000);
