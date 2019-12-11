@@ -7,6 +7,7 @@
     height:100%;
     width:100%;
     overflow-x:hidden;
+    overflow:hidden;
     color:#fff;
     display:flex;
     flex-wrap: wrap;
@@ -27,6 +28,7 @@
     background-image:url("../images/test.png");
   -webkit-filter: blur(2px) grayscale(90%); /* Safari 6.0 - 9.0 */
   filter: blur(2px) grayscale(90%);
+    overflow:hidden;
 }
 
 .map-overlay{
@@ -134,7 +136,7 @@
     font-weight: 700;
     font-weight: 700;
     font-style: italic;
-   // display:none;
+    display:none;
 
     h2{
         font-size:1.3em;

@@ -88,7 +88,7 @@ var letters = (function () {
 
         });
     
-        $(".the-guide").fadeIn(4000);
+        $(".the-guide").delay(10000).fadeIn(4000);
         $(".the-question").delay(4000).fadeIn(4000);
         
         letters.count_remembered = 0;
@@ -107,7 +107,8 @@ var letters = (function () {
         function intro(){
             
             // done
-            if(letters.count_remembered >= 5){
+            if(letters.count_remembered >= 3){
+                $("#my_words").attr('placeholder', 'What can space here do for you?');
                 console.log("Done with introduction!");
                 $(".the-guide").remove();
                 $(".the-question").fadeOut("slow");
@@ -148,7 +149,7 @@ var letters = (function () {
                     return item;
             }
             
-            $(".the-question").text(_select(prompts)).fadeIn(2000);
+            $(".the-question").hide().text(_select(prompts)).delay(6000).fadeIn(2000);
             $(".travel-place").fadeIn(5000);
             
     }
@@ -225,13 +226,20 @@ var letters = (function () {
 
     function _saveImage() {
         
-        if(letters.count_remembered < 5){
+        if(letters.count_remembered < 3){
             // counter for initial 3
+            $(".the-question").fadeOut(5000).delay(5000);
+            $(".travel-place").fadeOut(4000);
             letters.count_remembered += 1;
             letters.intro();
+            
+            $(".travel-place").delay(2000).fadeIn(2500);
+            
         } else{
             $(".the-question").fadeOut(2500);
         }
+        
+        clear();
         
         /* Append image to a div */
         domtoimage.toPng(document.getElementById('paint')).then(function (dataUrl) {
