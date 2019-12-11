@@ -225,6 +225,8 @@ h1{
     z-index:5;
     pointer-events: none;
     
+    
+    
 }   
 
 .the-question{
@@ -245,6 +247,10 @@ h1{
     font-weight: 400;
     font-style: italic;
     filter: blur(0.5px);
+}
+
+.explore{
+    display:none;
 }
 
 .please{
@@ -273,20 +279,21 @@ h1{
     top:0; left:0;
     width:100%;
     height:100%;
-    z-index:10;
-    background:#000;
+    z-index:9999910;
+    background:#fff;
+    
     display:flex;
     box-sizing: border-box;
     background-size:cover;
     line-height:1.3em;
-    background-image:url(https://chia.dev/create/lettered/intro-1.jpg);
+    //background-image:url(https://chia.dev/create/lettered/intro-1.jpg);
 
 
     .inner{
         margin:auto;
         width:80vw;
         max-width:600px;
-        color:#fff;
+        color:#000;
         pointer-events: none;
     }
     
@@ -295,7 +302,7 @@ h1{
         bottom:0;
         padding:5em;
         
-        a{ color: cyan; }
+        a{ color: blue; }
     }
 
     h1{
