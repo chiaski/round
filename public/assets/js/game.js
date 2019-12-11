@@ -233,8 +233,6 @@ var letters = (function () {
             $(".the-question").fadeOut(2500);
         }
         
-        $("#my_words").val("");
-             
         /* Append image to a div */
         domtoimage.toPng(document.getElementById('paint')).then(function (dataUrl) {
             var img = new Image();
