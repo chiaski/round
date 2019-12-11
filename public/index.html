@@ -1,165 +1,165 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <meta charset="UTF-8">
     <title>title</title>
     <link rel="stylesheet" href="assets/styling/main.css">
 
-      
-      <script src="./assets/js/util/socket.io.js"></script>  
-      <script src="./assets/js/util/p5.min.js"></script>  
-      <script src="./assets/js/util/dom-to-image.min.js"></script>  
-      
+
+    <script src="./assets/js/util/socket.io.js"></script>
+    <script src="./assets/js/util/p5.min.js"></script>
+    <script src="./assets/js/util/dom-to-image.min.js"></script>
+
     <script type="text/javascript" src="assets/js/util/html2canvas.min.js"></script>
-      
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/addons/p5.dom.min.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/addons/p5.sound.min.js">
-  </script>
-      
-      
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script> 
-      
-  <script src="./assets/js/main.js"></script>
-  <script src="./assets/js/draw.js"></script>
-      
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/addons/p5.dom.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/addons/p5.sound.min.js">
+    </script>
+
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
+
+    <script src="./assets/js/main.js"></script>
+    <script src="./assets/js/draw.js"></script>
+
     <script src="assets/js/game.js"></script>
 
-      
-  </head>
-  <body>
-      
-      <div id="container" class="container">
-      
-          <div class="box">
-              
-              <div class="time">
-              <span class="tell_time" id="loc_lat">14.5995</span> 
-              <span class="tell_time" id="loc_lng"> 120.9842</span> 
-              </div>
-              
-              
-              <center>
-              <div class="travel-place">
-                <h2>Close your eyes and hope to be brought somewhere like  <span id="loc_name">...</span></h2>
-                   <br>
-                   
-                
-                <input type="text" id="field_loc" name="location" placeholder="New Haven" value="New Heaven">
-                  
-                   <button type="button" onclick="letters._findPlace()">find</button>
-                   
-                   <button type="button" onclick="letters._saveImage()">save</button>
-                  <br><br>
-                 
-                   <!--
+
+</head>
+
+<body>
+
+    <div id="container" class="container">
+
+        <div class="box">
+
+            <div class="time">
+                <span class="tell_time" id="loc_lat">14.5995</span>
+                <span class="tell_time" id="loc_lng"> 120.9842</span>
+            </div>
+
+
+            <center>
+                <div class="travel-place">
+                    <h2>Close your eyes and hope to be brought somewhere like <span id="loc_name">...</span></h2>
+                    <br>
+
+
+                    <input type="text" id="field_loc" name="location" placeholder="New Haven" value="New Heaven">
+
+                    <button type="button" onclick="letters._findPlace()">find</button>
+
+                    <button type="button" onclick="letters._saveImage()">save</button>
+                    <br><br>
+
+                    <!--
   <input type="text" name="custom_color" placeholder="#ff0000" id="pickcolor" class="call-picker" />
               
   <div id="color-holder" class="color-holder call-picker"></div>
   <button id="color-btn">Change color</button> 
   <input type="text" name="stroke_width" placeholder="4" id="stroke-width-picker" class="stroke_width_picker" />
   <button id="stroke-btn">Change stroke width</button>-->
-              </div>
+                </div>
             </center>
-            
-              
-              <div class="map-overlay" style=""></div>
-              
-              <div id="map" style="">
-              
-              </div>
-          </div>
-      
-          
-          <div class="box" id="paint">
-              
-              <div class="words">
-              
-              <textarea id="my_words" placeholder="where are the peopel you know">do you remember me?
+
+
+            <div class="map-overlay" style=""></div>
+
+            <div id="map" style="">
+
+            </div>
+        </div>
+
+
+        <div class="box" id="paint">
+
+            <div class="words">
+
+                <textarea id="my_words" placeholder="where are the peopel you know">do you remember me?
                   </textarea></div>
-              
-              <div id="camera" class="camera">
-              <div class="camera-overlay"></div></div>
-              
-              
-              
-          </div>
-          
-          <div class="box" id="photo" style="min-height:100px;"></div>
-          
-          
-      </div>
-  
-      
+
+            <div id="camera" class="camera">
+                <div class="camera-overlay"></div>
+            </div>
+
+
+
+        </div>
+
+        <div class="box" id="photo" style="min-height:100px;"></div>
+
+
+    </div>
+
+
     <!-- SCRIPTS -->
-      
- <!-- <script src="assets/js/test.js"></script>-->
-     
-      
-      
- <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAq7DNXbXovJQsc6InqHtJelNBuG7IekWo"
-  type="text/javascript"></script>
-      
-      
-  <script type="text/javascript">
-    
-      
-          var standard_message = $('#my_words').val();
-    $('#my_words').focus(
-        function() {
-            if ($(this).val() == standard_message)
-                $(this).val("");
-        }
-    );
-    $('#my_words').blur(
-        function() {
-            if ($(this).val() == "")
-                $(this).val(standard_message);
-        }
-    );
-      
-      
-      
-   function autorun()
-   {
-        html2canvas(document.body).then(function(canvas) {
-        document.body.appendChild(canvas);
-    });
-       
+
+    <!-- <script src="assets/js/test.js"></script>-->
 
 
-   }
-   if (window.addEventListener) window.addEventListener("load", autorun, false);
-   else if (window.attachEvent) window.attachEvent("onload", autorun);
-   else window.onload = autorun;
-  </script>
-      
-      <!-- The core Firebase JS SDK is always required and must be listed first -->
+
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAq7DNXbXovJQsc6InqHtJelNBuG7IekWo" type="text/javascript"></script>
+
+
+    <script type="text/javascript">
+        var standard_message = $('#my_words').val();
+        $('#my_words').focus(
+            function() {
+                if ($(this).val() == standard_message)
+                    $(this).val("");
+            }
+        );
+        $('#my_words').blur(
+            function() {
+                if ($(this).val() == "")
+                    $(this).val(standard_message);
+            }
+        );
+
+
+
+        function autorun() {
+            html2canvas(document.body).then(function(canvas) {
+                document.body.appendChild(canvas);
+            });
+
+
+
+        }
+        if (window.addEventListener) window.addEventListener("load", autorun, false);
+        else if (window.attachEvent) window.attachEvent("onload", autorun);
+        else window.onload = autorun;
+
+    </script>
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/7.5.2/firebase-app.js"></script>
-      <script src="https://www.gstatic.com/firebasejs/7.5.2/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.5.2/firebase-database.js"></script>
 
     <!-- TODO: Add SDKs for Firebase products that you want to use
          https://firebase.google.com/docs/web/setup#available-libraries -->
 
     <script>
-      // Your web app's Firebase configuration
-      var firebaseConfig = {
-        apiKey: "AIzaSyB6YpHvE5evb-fycvBrLylaYd2h905V0ug",
-        authDomain: "lettered.firebaseapp.com",
-        databaseURL: "https://lettered.firebaseio.com",
-        projectId: "lettered",
-        storageBucket: "lettered.appspot.com",
-        messagingSenderId: "699344905467",
-        appId: "1:699344905467:web:96f14a770898f0433dbc5e",
-        measurementId: "G-VZ0ZBH58XL"
-      };
-      // Initialize Firebase
-      firebase.initializeApp(firebaseConfig);
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyB6YpHvE5evb-fycvBrLylaYd2h905V0ug",
+            authDomain: "lettered.firebaseapp.com",
+            databaseURL: "https://lettered.firebaseio.com",
+            projectId: "lettered",
+            storageBucket: "lettered.appspot.com",
+            messagingSenderId: "699344905467",
+            appId: "1:699344905467:web:96f14a770898f0433dbc5e",
+            measurementId: "G-VZ0ZBH58XL"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
         console.log("Done");
-  var database = firebase.database();
-        
-      
+        var database = firebase.database();
+
     </script>
-      
-     
-  </body>
+
+
+</body>
+
 </html>
