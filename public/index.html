@@ -162,7 +162,6 @@
           
         $('.remember').click(function(){
           socket.emit('message', $('#my_words').val());
-          $('#my_words').val('');
             
           return false;
         });
