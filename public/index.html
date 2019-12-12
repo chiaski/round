@@ -37,6 +37,7 @@
         <center><h3>round</h3></center>
         <p>provide at least five minutes to reflect (not alone). there will be prompts on the screen. these are questions by searching and walking through the world. take time to look at things, walk down familiar and unfamiliar roads, or take yourself to the unknown (if it is possible). you may <em>search, remember, or find</em>.</p>
             
+            
         <p>you may use your phone or browser. the experience is never complete if you are alone. ask the people around you (or a stranger) to come and join.</p>
     
             <div class="credits">
@@ -57,7 +58,7 @@
 
 
             <center>
-                <div class="travel-place" style="display:none;">
+                <div class="travel-place">
                     <h2> <span id="loc_name">...</span></h2>
                     <br>
 
@@ -68,7 +69,7 @@
 
                     <button type="button" class="remember" onclick="letters._saveImage()">remember</button>
                     
-                    <button style="display:none;" type="button" class="explore" onclick="letters.findLetter()">find</button>
+                    <button type="button" class="explore" onclick="letters.findLetter()">find</button>
                     
 
                     <!--
@@ -168,8 +169,7 @@
         socket.on('message', function(msg){
             
             // delete random if more than n
-            if($('div.please').length >= 9){
-                alert("too many!");
+            if($('div.please').length >= 12){
                 
                 let r = Math.floor(Math.random() * $('div.please').length);
                 

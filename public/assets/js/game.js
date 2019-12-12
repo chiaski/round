@@ -108,7 +108,7 @@ var letters = (function () {
         function intro(){
             
             // done
-            if(letters.count_remembered >= 4){
+            if(letters.count_remembered >= 3){
                 $(".explore").fadeIn(3000);
                 $("#my_words").attr('placeholder', 'What can space here do for you?');
                 console.log("Done with introduction!");
@@ -242,6 +242,7 @@ var letters = (function () {
             $(".travel-place").delay(2000).fadeIn(2500);
             
         } else{
+            $(".explore").fadeIn(3000);
             $(".the-question").fadeOut(2500);
         }
         
