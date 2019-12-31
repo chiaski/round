@@ -284,9 +284,9 @@ h1{
     
     display:flex;
     box-sizing: border-box;
-    background-size:cover;
+    background-size:cover !important;
     line-height:1.3em;
-    //background-image:url(https://chia.dev/create/lettered/intro-1.jpg);
+    background-image:url(https://chia.dev/create/lettered/intro-1.jpg);
 
 
     .inner{
