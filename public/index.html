@@ -147,12 +147,16 @@
                 $(".the-question").fadeOut();
             }
         );
+        
+        
         $('#my_words').blur(
             function() {
                 if ($(this).val() == "")
                     $(this).val(standard_message);
                 
                 $(".the-question").fadeIn("slow");
+                
+                $("button .remember").css("text-shadow", "0 0 #fff 20px")
             }
         );
         

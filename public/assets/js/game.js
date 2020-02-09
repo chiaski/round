@@ -43,6 +43,9 @@ var letters = (function () {
 
     /* LOAD MAP */
     function initialize() {
+        
+        console.log("Let's go somewhere nice and far.");
+        
         var fenway = {
             lat: 41.309327,
             lng: -72.929250
@@ -68,7 +71,8 @@ var letters = (function () {
 
         letters.sv = new google.maps.StreetViewService();
         letters.panorama.addListener('position_changed', function () {
-            console.log(letters.panorama.getPosition());
+         
+            // console.log(letters.panorama.getPosition());
 
             letters.curr_location = {
                 lat: letters.panorama.getPosition().lat(),
@@ -111,7 +115,7 @@ var letters = (function () {
             if(letters.count_remembered >= 3){
                 $(".explore").fadeIn(3000);
                 $("#my_words").attr('placeholder', 'What can space here do for you?');
-                console.log("Done with introduction!");
+                //console.log("Done with introduction!");
                 $(".the-question").fadeOut("slow");
                 return;
             }
@@ -161,14 +165,14 @@ var letters = (function () {
 
     function setLoc(location, view) {
 
-        console.log(location);
-        console.log(view);
+       // console.log(location);
+        //  console.log(view);
 
         letters.curr_location = {
             lat: location.lat,
             lng: location.lng
         };
-        console.log(letters.curr_location);
+      //  console.log(letters.curr_location);
 
 
         // letters.map.setCenter(new google.maps.LatLng(location.lat, location.lng));
@@ -198,7 +202,7 @@ var letters = (function () {
             }
 
 
-            console.log(data);
+           // console.log(data);
             letters.panorama.setPosition(data.location.latLng);
             letters.panorama.setPano(data.location.Pano);
             letters.panorama.setPov({
@@ -276,22 +280,18 @@ var letters = (function () {
                 const place = results[0];
                 const place_loc = place.geometry.location;
 
-                console.log(place);
-                console.log(place.geometry.location);
-
+               //  console.log(place);
+               
                 // change name so that it focuses on neighbourhood, city, or route //ignore street number   
 
                 var place_center = {
-                    lat: place_loc.lat,
-                    lng: place_loc.long
+                    lat: place.geometry.location.lat(),
+                    lng: place.geometry.location.lng()
                 };
 
-                letters.curr_location = {
-                    lat: place_loc.lat,
-                    lng: place_loc.long
-                };
+                letters.curr_location = place_center;
 
-                console.log(place_center);
+               // console.log(place_center);
 
                 $("#loc_name").text(place.address_components[0].short_name);
                 $("#loc_lat").text(place_center.lat);
@@ -330,7 +330,7 @@ var letters = (function () {
 
                 findPanorama(200);
 
-
+                document.getElementById("field_loc").value = "";
 
 
                 /*
