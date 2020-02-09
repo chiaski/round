@@ -161,7 +161,7 @@ body{
     }
     
     input:focus{
-        color:red;
+        color:#fff;
         font-style: italic;
         text-shadow:0 5px 20px #fff !important;
     }
@@ -290,11 +290,31 @@ h1{
 
 
     .inner{
+        background: rgba(67, 67, 67, 0.7);
         margin:auto;
-        width:80vw;
-        max-width:600px;
+        height:100%;
+        width:100%;
         color:#000;
         pointer-events: none;
+        display: flex;
+        
+        
+        .inner-hold{
+            max-width:500px;
+            height:500px;
+            margin:auto;
+        }
+        
+        h3{
+            
+            font-size:2em;
+        }
+        
+        p{
+            font-size:1.2em;
+            line-height:1.5em;
+            font-weight:800;
+        }
     }
     
     .credits{
@@ -302,7 +322,7 @@ h1{
         bottom:0;
         padding:5em;
         
-        a{ color: blue; }
+        a{ color: #fff; text-decoration: none; }
     }
 
     h1{

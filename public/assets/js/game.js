@@ -274,20 +274,21 @@ var letters = (function () {
             if (status == google.maps.GeocoderStatus.OK) {
 
                 const place = results[0];
-                const place_loc = place.geometry.viewport;
+                const place_loc = place.geometry.location;
 
                 console.log(place);
+                console.log(place.geometry.location);
 
                 // change name so that it focuses on neighbourhood, city, or route //ignore street number   
 
                 var place_center = {
-                    lat: place_loc.pa.h,
-                    lng: place_loc.ka.h
+                    lat: place_loc.lat,
+                    lng: place_loc.long
                 };
 
                 letters.curr_location = {
-                    lat: place_loc.pa.h,
-                    lng: place_loc.ka.h
+                    lat: place_loc.lat,
+                    lng: place_loc.long
                 };
 
                 console.log(place_center);
